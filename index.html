@@ -24,15 +24,38 @@
       </section>
 
       <form class="form">
-        <input
-          type="text"
-          class="input-form"
-          placeholder="Digite uma nova Tarefa"
-        />
-        <button></button>
+        <input type="text" class="input-form" placeholder="Digite uma nova Tarefa..."/>
+        <button class="btn"></button>
       </form>
-        </div>
-      </article>
+      
+        <section class="tasksContainer">
+          <article class="task-list">
+            <p>Suas tarefas</p>
+          </article>
+
+          <section class="task-item">
+            <div class="tasksTitle-completed">
+              <input type="checkbox" name="" id="">
+              <p>Tarefa titulo</p>
+            </div>
+            <img src="./images/icon-cross.svg" alt="" class="deletarTarefa">
+          </section>
+
+          <nav class = "filtros">
+            <div class="itensLeft">
+              <p class="btn-filtro" >items left</p>
+            </div>
+            <div class="all-active-completed">
+            <p class="btn-filtro" >All</p>
+            <p class="btn-filtro" >Active</p>
+            <p class="btn-filtro" >Completed</p>  
+            </div>
+            <div class="clearCompleted">
+              <p class="btn-filtro" >Clear Completed</p>
+            </div>      
+          </nav>
+        </section>
+        
     </main>
   </body>
 </html>
