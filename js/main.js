@@ -9,10 +9,11 @@
     e.preventDefault();
 
     tasks.push({ titulo: `${input.value}`, completa: `${false}` });
-    console.log(tasks)
-    
-    render()
+    render();
     tarefasCount();
+
+    input.value = "";
+    input.focus();
   });
 
   function criarTask(titulo) {
@@ -24,7 +25,7 @@
 
     const checkBox = document.createElement("input");
     checkBox.setAttribute("type", "checkbox");
-  
+
     checkBox.classList.add("taskCompleted");
     taskTitleCompleted.appendChild(checkBox);
 
@@ -32,29 +33,41 @@
     tituloTask.textContent = `${titulo}`;
     taskTitleCompleted.appendChild(tituloTask);
 
-    taskItem.appendChild(taskTitleCompleted)
+    taskItem.appendChild(taskTitleCompleted);
 
-    const img = document.createElement("img")
-    img.setAttribute("src", "./images/icon-cross.svg");
-    img.classList.add("deletarTarefa")
+    deleteTask(taskItem);
 
-    taskItem.appendChild(img)
-    containerTasks.appendChild(taskItem);
+    return taskItem;
   }
 
-function render(){
-    containerTasks.innerHTML = ""
+  function deleteTask(tarefa) {
+    const deletar = document.createElement("img");
+    deletar.setAttribute("src", "./images/icon-cross.svg");
+    deletar.classList.add("deletarTarefa");
 
-    tasks.map((task) => {
-    criarTask(task.titulo);
+    deletar.addEventListener("click", () => {
+      deletar.parentElement.remove();
+      tarefasCount();
+    });
 
-  });
-}
+    tarefa.appendChild(deletar);
+  }
+
+  function render() {
+    
+    containerTasks.innerHTML = "";
+
+    tasks.forEach((task) => {
+      containerTasks.appendChild(criarTask(task.titulo));
+    });
+  }
 
   function tarefasCount() {
     const tasksNumbers = document.querySelector(".btn-filtro");
-    tasksNumbers.textContent = `${tasks.length} tarefas`;
+    let numeroTarefas = containerTasks.childNodes.length;
+
+    numeroTarefas < 2
+      ? (tasksNumbers.textContent = `${numeroTarefas} tarefa restante`)
+      : (tasksNumbers.textContent = `${numeroTarefas} tarefas restantes`);
   }
-
-
 })();
