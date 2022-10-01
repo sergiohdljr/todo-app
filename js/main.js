@@ -1,7 +1,9 @@
 (() => {
+  
   const input = document.querySelector(".input-form");
   const btn = document.querySelector(".btn");
   const containerTasks = document.querySelector(".tasks-container-itens");
+  let numeroTarefas = containerTasks.getElementsByTagName("section")
 
   let tasks = [];
 
@@ -9,11 +11,13 @@
     e.preventDefault();
 
     tasks.push({ titulo: `${input.value}`, completa: `${false}` });
+
     render();
     tarefasCount();
 
     input.value = "";
     input.focus();
+    console.log(numeroTarefas.length)
   });
 
   function criarTask(titulo) {
@@ -45,16 +49,26 @@
     deletar.setAttribute("src", "./images/icon-cross.svg");
     deletar.classList.add("deletarTarefa");
 
-    deletar.addEventListener("click", () => {
-      deletar.parentElement.remove();
+    deletar.addEventListener("click", (e) => {
+      const Elemento = e.target.parentElement;
+      const indexObj = indexTarefa(Elemento);
+
+      tasks.splice(indexObj,1)
+
+      render()
       tarefasCount();
     });
 
     tarefa.appendChild(deletar);
   }
 
+  function indexTarefa(tarefa){
+    const indexElemento = [...numeroTarefas].indexOf(tarefa);
+
+    return tasks[indexElemento]
+  }
+
   function render() {
-    
     containerTasks.innerHTML = "";
 
     tasks.forEach((task) => {
@@ -64,10 +78,9 @@
 
   function tarefasCount() {
     const tasksNumbers = document.querySelector(".btn-filtro");
-    let numeroTarefas = containerTasks.childNodes.length;
-
-    numeroTarefas < 2
-      ? (tasksNumbers.textContent = `${numeroTarefas} tarefa restante`)
-      : (tasksNumbers.textContent = `${numeroTarefas} tarefas restantes`);
+    const tamanhoListaTarefas = numeroTarefas.length
+    tamanhoListaTarefas < 2
+      ? (tasksNumbers.textContent = `${tamanhoListaTarefas} tarefa restante`)
+      : (tasksNumbers.textContent = `${tamanhoListaTarefas} tarefas restantes`);
   }
 })();
