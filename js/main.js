@@ -1,5 +1,5 @@
 (() => {
-  
+
   const input = document.querySelector(".input-form");
   const btn = document.querySelector(".btn");
   const containerTasks = document.querySelector(".tasks-container-itens");
@@ -10,15 +10,19 @@
   btn.addEventListener("click", (e) => {
     e.preventDefault();
 
-    tasks.push({ titulo: `${input.value}`, completa: `${false}` });
-
+    adicionarTarefas(input.value)
+  
     render();
     tarefasCount();
 
     input.value = "";
     input.focus();
-    console.log(numeroTarefas.length)
+
   });
+
+  function adicionarTarefas(tituloTarefa){
+    tasks.push({titulo: `${tituloTarefa}`, completa: false })
+  }
 
   function criarTask(titulo) {
     const taskItem = document.createElement("section");
@@ -27,11 +31,7 @@
     const taskTitleCompleted = document.createElement("div");
     taskTitleCompleted.classList.add("tasksTitle-completed");
 
-    const checkBox = document.createElement("input");
-    checkBox.setAttribute("type", "checkbox");
-
-    checkBox.classList.add("taskCompleted");
-    taskTitleCompleted.appendChild(checkBox);
+    checkbox(taskTitleCompleted);
 
     const tituloTask = document.createElement("p");
     tituloTask.textContent = `${titulo}`;
@@ -42,6 +42,31 @@
     deleteTask(taskItem);
 
     return taskItem;
+  }
+
+  function checkbox(pai){
+      const checkBox = document.createElement("input");
+      checkBox.setAttribute("type", "checkbox");
+      checkBox.classList.add("taskCompleted");
+
+      checkBox.addEventListener('change',(e)=>{
+
+        const elemento = e.target.parentElement
+        const elementopai = elemento.parentElement
+        const indexObj = indexTarefa(elementopai)
+
+        console.log(indexObj)
+        const estado = tasks[indexObj].completa;
+        
+        const attEstado = tasks[indexObj].completa = estado ? false : true
+        checkBox.checked = attEstado
+
+        const paragrafo = elementopai.querySelector("p")
+        paragrafo.classList.toggle("completa")
+
+      })
+
+      pai.appendChild(checkBox)
   }
 
   function deleteTask(tarefa) {
@@ -64,8 +89,9 @@
 
   function indexTarefa(tarefa){
     const indexElemento = [...numeroTarefas].indexOf(tarefa);
+    
+    return indexElemento
 
-    return tasks[indexElemento]
   }
 
   function render() {
