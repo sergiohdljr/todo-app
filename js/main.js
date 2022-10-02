@@ -1,27 +1,28 @@
 (() => {
-
   const input = document.querySelector(".input-form");
   const btn = document.querySelector(".btn");
   const containerTasks = document.querySelector(".tasks-container-itens");
-  let numeroTarefas = containerTasks.getElementsByTagName("section")
+  let numeroTarefas = containerTasks.getElementsByTagName("section");
+
+  const completasbtn = document.querySelector(".completas");
+  const todasbtn = document.querySelector(".todas");
 
   let tasks = [];
 
   btn.addEventListener("click", (e) => {
     e.preventDefault();
 
-    adicionarTarefas(input.value)
-  
-    render();
+    adicionarTarefas(input.value);
+
+    render(tasks);
     tarefasCount();
 
     input.value = "";
     input.focus();
-
   });
 
-  function adicionarTarefas(tituloTarefa){
-    tasks.push({titulo: `${tituloTarefa}`, completa: false })
+  function adicionarTarefas(tituloTarefa) {
+    tasks.push({ titulo: `${tituloTarefa}`, completa: false });
   }
 
   function criarTask(titulo) {
@@ -31,7 +32,7 @@
     const taskTitleCompleted = document.createElement("div");
     taskTitleCompleted.classList.add("tasksTitle-completed");
 
-    checkbox(taskTitleCompleted);
+    taskTitleCompleted.appendChild(checkbox(tasks.completa));
 
     const tituloTask = document.createElement("p");
     tituloTask.textContent = `${titulo}`;
@@ -44,29 +45,33 @@
     return taskItem;
   }
 
-  function checkbox(pai){
-      const checkBox = document.createElement("input");
-      checkBox.setAttribute("type", "checkbox");
-      checkBox.classList.add("taskCompleted");
+  function checkbox() {
+    const checkBox = document.createElement("button");
+    checkBox.classList.add("taskCompleted");
 
-      checkBox.addEventListener('change',(e)=>{
+    for (let index = 0; index < tasks.length; index++) {
+      if (tasks[index].completa == true) {
+        console.log(tasks[index])
+        checkBox.classList.add("checked");
+      }
+    }
 
-        const elemento = e.target.parentElement
-        const elementopai = elemento.parentElement
-        const indexObj = indexTarefa(elementopai)
+    checkBox.addEventListener("click", (e) => {
+      const elemento = e.target.parentElement;
+      const elementopai = elemento.parentElement;
+      const indexObj = indexTarefa(elementopai);
 
-        console.log(indexObj)
-        const estado = tasks[indexObj].completa;
-        
-        const attEstado = tasks[indexObj].completa = estado ? false : true
-        checkBox.checked = attEstado
+      const estado = tasks[indexObj].completa;
 
-        const paragrafo = elementopai.querySelector("p")
-        paragrafo.classList.toggle("completa")
+      tasks[indexObj].completa = !estado;
 
-      })
+      const paragrafo = elementopai.querySelector("p");
+      paragrafo.classList.toggle("completa");
+      checkBox.classList.toggle("checked");
+    });
 
-      pai.appendChild(checkBox)
+    return checkBox;
+
   }
 
   function deleteTask(tarefa) {
@@ -78,35 +83,41 @@
       const Elemento = e.target.parentElement;
       const indexObj = indexTarefa(Elemento);
 
-      tasks.splice(indexObj,1)
+      tasks.splice(indexObj, 1);
 
-      render()
+      render(tasks);
       tarefasCount();
     });
 
     tarefa.appendChild(deletar);
   }
 
-  function indexTarefa(tarefa){
+  function indexTarefa(tarefa) {
     const indexElemento = [...numeroTarefas].indexOf(tarefa);
-    
-    return indexElemento
-
+    return indexElemento;
   }
 
-  function render() {
+  function render(array) {
+
     containerTasks.innerHTML = "";
 
-    tasks.forEach((task) => {
+    array.forEach((task) => {
       containerTasks.appendChild(criarTask(task.titulo));
     });
   }
 
   function tarefasCount() {
     const tasksNumbers = document.querySelector(".btn-filtro");
-    const tamanhoListaTarefas = numeroTarefas.length
+    const tamanhoListaTarefas = numeroTarefas.length;
     tamanhoListaTarefas < 2
       ? (tasksNumbers.textContent = `${tamanhoListaTarefas} tarefa restante`)
       : (tasksNumbers.textContent = `${tamanhoListaTarefas} tarefas restantes`);
   }
+
+
+completasbtn.addEventListener("click", () => {
+  const arrayCompletas = tasks.filter(task => task.completa == true)
+
+  render(arrayCompletas);
+});
 })();
