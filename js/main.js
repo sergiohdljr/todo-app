@@ -49,13 +49,6 @@
     const checkBox = document.createElement("button");
     checkBox.classList.add("taskCompleted");
 
-    for (let index = 0; index < tasks.length; index++) {
-      if (tasks[index].completa == true) {
-        console.log(tasks[index])
-        checkBox.classList.add("checked");
-      }
-    }
-
     checkBox.addEventListener("click", (e) => {
       const elemento = e.target.parentElement;
       const elementopai = elemento.parentElement;
@@ -69,6 +62,12 @@
       paragrafo.classList.toggle("completa");
       checkBox.classList.toggle("checked");
     });
+
+    for (let index = 0; index < tasks.length; index++) {
+      if (tasks[index].completa == true) {
+        checkBox.classList.add("checked");
+      }
+    }
 
     return checkBox;
 
@@ -116,8 +115,9 @@
 
 
 completasbtn.addEventListener("click", () => {
-  const arrayCompletas = tasks.filter(task => task.completa == true)
 
+  const arrayCompletas = tasks.filter(task => task.completa == true)
   render(arrayCompletas);
+
 });
 })();
