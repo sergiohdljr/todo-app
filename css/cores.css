@@ -1,14 +1,9 @@
-:root{
-    --Bright-Blue: hsl(220, 98%, 61%);
-    --Check-Background: linear-gradient #57ddff to #c058f3;
+:root{    
+   /* light theme */
 
-    /* dark theme */
-
-    --Very-Dark-Blue: hsl(235, 21%, 11%);
-    --Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
-    --Light-Grayish-Blue: hsl(234, 39%, 85%);
-    --Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
-    --Dark-Grayish-Blue: hsl(234, 11%, 52%);
-    --Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
-    --Very-Dark-Grayish-Blue: hsl(237, 14%, 26%);
+    --bg-color:hsl(0, 0%, 98%);
+    --app-color:hsl(0, 0%, 100%);
+    --text-color:hsl(235, 19%, 35%);;
+    --text-color-hover:hsl(220, 98%, 61%);
+    --border-color: hsl(236, 33%, 92%);
 }

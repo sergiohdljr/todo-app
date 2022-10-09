@@ -1,4 +1,5 @@
 (() => {
+  
   const input = document.querySelector(".input-form");
   const btn = document.querySelector(".btn");
   const containerTasks = document.querySelector(".tasks-container-itens");
@@ -32,7 +33,7 @@
     const taskTitleCompleted = document.createElement("div");
     taskTitleCompleted.classList.add("tasksTitle-completed");
 
-    taskTitleCompleted.appendChild(checkbox(tasks.completa));
+    taskTitleCompleted.appendChild(checkbox());
 
     const tituloTask = document.createElement("p");
     tituloTask.textContent = `${titulo}`;
@@ -49,6 +50,12 @@
     const checkBox = document.createElement("button");
     checkBox.classList.add("taskCompleted");
 
+    for (let index = 0; index < tasks.length; index++) {
+      if (tasks[index].completa == false) {
+        checkBox.classList.add("checked");
+      }
+    }
+
     checkBox.addEventListener("click", (e) => {
       const elemento = e.target.parentElement;
       const elementopai = elemento.parentElement;
@@ -63,11 +70,6 @@
       checkBox.classList.toggle("checked");
     });
 
-    for (let index = 0; index < tasks.length; index++) {
-      if (tasks[index].completa == true) {
-        checkBox.classList.add("checked");
-      }
-    }
 
     return checkBox;
 

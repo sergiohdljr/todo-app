@@ -12,7 +12,7 @@
 }
 
 .title{
-    color: #fff;
+    color:var(--app-color);
     letter-spacing: 1.5rem;
     font-size: 2rem;
 }
@@ -27,7 +27,7 @@
     height: 50px;
     display: flex;
     align-items: center;
-    background-color: var(--Very-Dark-Desaturated-Blue);
+    background-color: var(--bg-color);
     border-radius: 0.3rem;
      -webkit-box-shadow: 0px 3px 41px -1px rgba(0,0,0,0.92); 
     box-shadow: 0px 3px 41px -1px rgba(0,0,0,0.92);
@@ -39,7 +39,7 @@
     background-color: transparent;
     border: none;
     outline: none;
-    color: #fff;
+    color:var(--text-color);
     font-size: 1rem;
     padding: 1rem;
     font-size: 1.2rem;
@@ -51,7 +51,7 @@
     border: none;
     outline: none;
     border-radius: 0.3rem;
-    background-color: var(--Very-Dark-Blue);
+    background-color: var(--text-color-hover);
     background-image: url(../images/icon-arrow.svg);
     background-position: center;
     background-repeat: no-repeat;
@@ -66,12 +66,12 @@
 .tasksContainer{
     width: 100%;
     height: auto;   
-    background-color: var(--Very-Dark-Desaturated-Blue);
+    background-color: var(--app-color);
     display: flex;
     flex-direction: column;
     border-radius: 0.5rem;
-    -webkit-box-shadow: 0px 3px 41px -1px rgba(0,0,0,0.92); 
-    box-shadow: 0px 3px 41px -1px rgba(0,0,0,0.92);
+    -webkit-box-shadow: 0px 0px 20px -1px rgba(0,0,0,0.20); 
+    box-shadow: 0px 1px 20px -1px rgba(0,0,0,0.20);
 }
 
 .task-title{
@@ -81,11 +81,11 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    border-bottom: 0.1px  hsl(234, 11%, 52%) solid;
+    border-bottom: 0.1px var(--border-color) solid;
 }
 
 .task-title > p{
-    color:var(--Light-Grayish-Blue);
+    color:var(--text-color);
     font-size: 1.5rem;
     cursor: pointer;
     transition: 0.2s ease-in;
@@ -99,7 +99,7 @@
     width: 17px;
     height: 17px;
     background-color: transparent;
-    border: 0.3px var(--Light-Grayish-Blue) solid;
+    border: 0.3px var(--text-color) solid;
     border-radius: 50%;
     outline: none;
     cursor: pointer;
@@ -110,7 +110,7 @@
 }
 
 .checked{
-    background-image: linear-gradient(90deg, #57ddff,#c058f3);
+    background-image: red;
 }
 
 
@@ -125,7 +125,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border-bottom: 0.1px  hsl(234, 11%, 52%) solid;
+    border-bottom: 0.1px var(--border-color) solid;
 }
 
 .tasksTitle-completed{
@@ -137,14 +137,14 @@
 
 .tasksTitle-completed>p{
    padding-top: 0.3px; 
-   color:var(--Light-Grayish-Blue);
+   color:var(--text-color);
     font-size: 1.2rem;
     cursor: pointer;
     transition: 0.2s ease-in;
 }
 
 .tasksTitle-completed>p:hover{
-    color: var(--Bright-Blue);
+    color: var(--text-color-hover);
 }
 
 .deletarTarefa{
@@ -171,12 +171,12 @@
 }
 
 .btn-filtro{
-    color:var(--Light-Grayish-Blue);
+    color:var(--text-color);
     font-size: 0.9rem;
     cursor: pointer;
     transition: 0.2s ease-in;
 }
 
 .btn-filtro:hover{
-    color: var(--Bright-Blue);
+    color: var(--text-color-hover);
 }
